@@ -126,7 +126,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
         decoration: new InputDecoration(labelText: 'Password'),
         obscureText: true,
         validator: (value) {
-          return value!.isEmpty ? 'Password is required.' : null;
+          return value!.isEmpty ? 'Password is Required.' : null;
         },
         onSaved: (value) {
           _password = value!;
