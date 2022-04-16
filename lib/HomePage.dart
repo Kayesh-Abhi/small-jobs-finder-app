@@ -3,6 +3,7 @@ import 'Authentication.dart';
 import 'PhotoUpload.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'PaymentPage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -105,7 +106,10 @@ class _HomePageState extends State<HomePage> {
                 icon: new Icon(Icons.payment),
                 iconSize: 35,
                 color: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                },
               ),
             ],
           ),
