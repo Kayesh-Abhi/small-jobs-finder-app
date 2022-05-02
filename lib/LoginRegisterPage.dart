@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blop_app/Authentication.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_blop_app/DialogBox.dart';
 import 'Authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:http/http.dart' as http;
 
 class LoginRegisterPage extends StatefulWidget {
   LoginRegisterPage({
@@ -54,6 +57,30 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
           dialogBox.information(context, "Congratulations!",
               "Your account has been created successfully.");
           print("Register userId = " + userId);
+
+          //Registration Email
+          final serviceId = 'service_9a7r71d';
+          final templateId = 'template_l69vj1j';
+          final userrId = '13rBjaYSOBb5X-sTe';
+
+          final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+          final response = await http.post(
+            url,
+            headers: {
+              'origin': 'http://localhost',
+              'Content-Type': 'application/json',
+            },
+            body: json.encode({
+              'service_id': serviceId,
+              'template_id': templateId,
+              'user_id': userrId,
+              'template_params': {
+                'to_name': _email,
+                'to_email': _email,
+              },
+            }),
+          );
+          print("email status: " + response.body);
         }
         widget.onSignedIn();
       } catch (e) {
@@ -159,7 +186,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
           onPressed: validateAndSubmit,
         ),
         FlatButton(
-          child: Text("Not have an account? Create account.",
+          child: Text("Don't have an account? Create now.",
               style: TextStyle(fontSize: 14)),
           textColor: Colors.blue,
           onPressed: moveToRegister,
