@@ -6,6 +6,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: PayMent(),
       ),
@@ -38,6 +39,23 @@ class _PayMentState extends State<PayMent> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                child: Text(
+                  "    Please enter the payment below",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 9,
+            ),
             TextField(
               controller: _controller,
               decoration: InputDecoration(
@@ -45,7 +63,7 @@ class _PayMentState extends State<PayMent> {
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(
                   width: 5,
-                  color: Colors.orange,
+                  color: Colors.blue,
                 ),
               )),
             ),

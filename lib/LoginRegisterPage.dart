@@ -23,9 +23,9 @@ class LoginRegisterPage extends StatefulWidget {
 enum FormType { login, register }
 
 class _LoginRegisterState extends State<LoginRegisterPage> {
-  DialogBox dialogBox = new DialogBox();
+  DialogBox dialogBox = DialogBox();
 
-  final formKey = new GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   FormType _formType = FormType.login;
   String _email = "";
   String _password = "";
@@ -83,16 +83,16 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      appBar: new AppBar(
-        title: new Text("Small Job Finder App"),
+      appBar: AppBar(
+        title: Text("Small Job Finder App"),
       ),
-      body: new Container(
+      body: Container(
         margin: EdgeInsets.all(15.0),
-        child: new Form(
+        child: Form(
           key: formKey,
-          child: new Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: createInputs() + createButtons(),
           ),
@@ -110,8 +110,8 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
       SizedBox(
         height: 20.0,
       ),
-      new TextFormField(
-        decoration: new InputDecoration(labelText: 'Email'),
+      TextFormField(
+        decoration: InputDecoration(labelText: 'Email'),
         validator: (value) {
           return value!.isEmpty ? 'Email is required.' : null;
         },
@@ -122,8 +122,8 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
       SizedBox(
         height: 10.0,
       ),
-      new TextFormField(
-        decoration: new InputDecoration(labelText: 'Password'),
+      TextFormField(
+        decoration: InputDecoration(labelText: 'Password'),
         obscureText: true,
         validator: (value) {
           return value!.isEmpty ? 'Password is Required.' : null;
@@ -139,9 +139,9 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
   }
 
   Widget logo() {
-    return new Hero(
+    return Hero(
       tag: 'hero', //i added this
-      child: new CircleAvatar(
+      child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 110.0,
         child: Image.asset('images/logo.png'),
@@ -152,30 +152,30 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
   List<Widget> createButtons() {
     if (_formType == FormType.login) {
       return [
-        new RaisedButton(
-          child: new Text("Login", style: new TextStyle(fontSize: 20)),
+        RaisedButton(
+          child: Text("Login", style: TextStyle(fontSize: 20)),
           textColor: Colors.white,
           color: Colors.blue,
           onPressed: validateAndSubmit,
         ),
-        new FlatButton(
-          child: new Text("Not have an account? Create account.",
-              style: new TextStyle(fontSize: 14)),
+        FlatButton(
+          child: Text("Not have an account? Create account.",
+              style: TextStyle(fontSize: 14)),
           textColor: Colors.blue,
           onPressed: moveToRegister,
         ),
       ];
     } else {
       return [
-        new RaisedButton(
-          child: new Text("Create Account", style: new TextStyle(fontSize: 20)),
+        RaisedButton(
+          child: Text("Create Account", style: TextStyle(fontSize: 20)),
           textColor: Colors.white,
           color: Colors.blue,
           onPressed: validateAndSubmit,
         ),
-        new FlatButton(
-          child: new Text("Already have an account? Login",
-              style: new TextStyle(fontSize: 14)),
+        FlatButton(
+          child: Text("Already have an account? Login",
+              style: TextStyle(fontSize: 14)),
           textColor: Colors.blue,
           onPressed: moveToLogin,
         ),

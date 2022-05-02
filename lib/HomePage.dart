@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       postsList.clear();
 
       for (var individualKey in KEYS) {
-        Posts posts = new Posts(
+        Posts posts = Posts(
           DATA[individualKey]['image'],
           DATA[individualKey]['description'],
           DATA[individualKey]['date'],
@@ -61,14 +61,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Available Jobs"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Available Jobs"),
       ),
-      body: new Container(
+      floatingActionButton: FloatingActionButton(
+        //chat bot button
+        child: Icon(Icons.message),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PaymentPage()));
+        },
+      ),
+      body: Container(
         child: postsList.length == 0
-            ? new Text("No Job Postings available")
-            : new ListView.builder(
+            ? Text("No Job Postings available")
+            : ListView.builder(
                 itemCount: postsList.length,
                 itemBuilder: (_, index) {
                   return PostsUI(
@@ -78,33 +86,59 @@ class _HomePageState extends State<HomePage> {
                       postsList[index].time);
                 }),
       ),
-      bottomNavigationBar: new BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
-        child: new Container(
+        child: Container(
           margin: const EdgeInsets.only(left: 70.0, right: 70.0),
-          child: new Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              new IconButton(
-                icon: new Icon(Icons.logout),
-                iconSize: 35,
+              IconButton(
+                visualDensity: VisualDensity(horizontal: -4.0),
+                padding: EdgeInsets.zero,
+                icon: Icon(Icons.logout),
+                iconSize: 30,
                 color: Colors.white,
                 onPressed: _logoutUser,
               ),
-              new IconButton(
-                icon: new Icon(Icons.add_circle_rounded),
+              IconButton(
+                visualDensity: VisualDensity(horizontal: -4.0),
+                padding: EdgeInsets.zero,
+                icon: Icon(Icons.search_rounded),
+                iconSize: 30,
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.add_circle_rounded),
                 iconSize: 50,
                 color: Colors.white,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return new UploadPhotoPage();
+                    return UploadPhotoPage();
                   }));
                 },
               ),
-              new IconButton(
-                icon: new Icon(Icons.payment),
-                iconSize: 35,
+              IconButton(
+                visualDensity: VisualDensity(horizontal: -4.0),
+                padding: EdgeInsets.zero,
+                icon: Icon(Icons.location_on_rounded),
+                iconSize: 30,
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                },
+              ),
+              IconButton(
+                visualDensity: VisualDensity(horizontal: -4.0),
+                padding: EdgeInsets.zero,
+                icon: Icon(Icons.payment),
+                iconSize: 30,
                 color: Colors.white,
                 onPressed: () {
                   Navigator.push(context,
@@ -119,23 +153,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget PostsUI(String image, String description, String date, String time) {
-    return new Card(
+    return Card(
       elevation: 10.0,
       margin: EdgeInsets.all(15.0),
-      child: new Container(
+      child: Container(
         padding: new EdgeInsets.all(14.0),
-        child: new Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new Text(
+                Text(
                   date,
                   style: Theme.of(context).textTheme.subtitle2,
                   textAlign: TextAlign.center,
                 ),
-                new Text(
+                Text(
                   time,
                   style: Theme.of(context).textTheme.subtitle2,
                   textAlign: TextAlign.center,
@@ -145,11 +179,11 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10.0,
             ),
-            new Image.network(image, fit: BoxFit.cover),
+            Image.network(image, fit: BoxFit.cover),
             SizedBox(
               height: 10.0,
             ),
-            new Text(
+            Text(
               description,
               style: Theme.of(context).textTheme.subtitle1,
               textAlign: TextAlign.center,

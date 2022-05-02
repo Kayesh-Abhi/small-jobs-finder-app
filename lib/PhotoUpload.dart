@@ -15,7 +15,7 @@ class UploadPhotoPage extends StatefulWidget {
 
 class _UploadPhotoPageState extends State<UploadPhotoPage> {
   late String _myValue; //added late key word
-  final formKey = new GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   late String url;
 
   File? sampleImage; //edited this
@@ -42,7 +42,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       final Reference postImageRef = FirebaseStorage.instance
           .ref()
           .child("Post Images"); //change Storagereference to reference
-      var timeKey = new DateTime.now();
+      var timeKey = DateTime.now();
       final UploadTask uploadTask =
           postImageRef.child(timeKey.toString() + ".jpg").putFile(sampleImage!);
       var ImageUrl = await (await uploadTask)
@@ -57,9 +57,9 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   }
 
   void saveToDatabase(url) {
-    var dbTimeKey = new DateTime.now();
-    var formatDate = new DateFormat('MMM d, yyyy');
-    var formatTime = new DateFormat('EEEE, hh:mm aaa');
+    var dbTimeKey = DateTime.now();
+    var formatDate = DateFormat('MMM d, yyyy');
+    var formatTime = DateFormat('EEEE, hh:mm aaa');
 
     String date = formatDate.format(dbTimeKey);
     String time = formatTime.format(dbTimeKey);
@@ -87,25 +87,25 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Upload a New Job"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Upload a New Job"),
         centerTitle: true,
       ),
-      body: new Center(
+      body: Center(
         child: sampleImage == null ? Text("Select an Image") : enableUpload(),
       ),
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: getImage, //getImage
         tooltip: 'Add Image',
-        child: new Icon(Icons.add_a_photo),
+        child: Icon(Icons.add_a_photo),
       ),
     );
   }
 
   Widget enableUpload() {
     return Container(
-      child: new Form(
+      child: Form(
         key: formKey,
         child: Column(
           children: <Widget>[
@@ -118,7 +118,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
               height: 15.0,
             ),
             TextFormField(
-              decoration: new InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(labelText: 'Description'),
               validator: (value) {
                 return value!.isEmpty ? 'Job description is required' : null;
               },
