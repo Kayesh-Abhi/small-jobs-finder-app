@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blop_app/ChatBotScreen.dart';
 import 'Authentication.dart';
 import 'PhotoUpload.dart';
 import 'Posts.dart';
@@ -69,8 +70,8 @@ class _HomePageState extends State<HomePage> {
         //chat bot button
         child: Icon(Icons.message),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PaymentPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ChatBotScreen()));
         },
       ),
       body: Container(
